@@ -2,7 +2,7 @@
 import SmoothScroll from "@/components/smooth-scroll";
 // import Navbar from "@/components/navbar";
 import HeroScroll from "@/components/hero-scroll";
-import BrandStatement from "@/components/brand-statement";
+// import BrandStatement from "@/components/brand-statement";
 // import YachtMorph from "@/components/yacht-morph";
 import HorizontalShowcase from "@/components/horizontal-showcase";
 import Experience from "@/components/experience";
@@ -45,7 +45,9 @@ export default function Home() {
 />
         </section>
 
-        <BrandStatement />
+        {/* <BrandStatement /> */}
+        
+        
         <ProcessScroll />
        
 
@@ -69,7 +71,7 @@ export default function Home() {
         <Experience />
          <FeaturesGrid />  
           {/* <HorizontalShowcase />  */}
-         <ProjectShowcase />
+         {/* <ProjectShowcase /> */}
         {/* <Globe /> */}
           <SectionFadeTransition 
         fromSection="#work"        // adjust to actual id of your showcase section

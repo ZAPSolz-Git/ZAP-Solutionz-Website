@@ -580,98 +580,91 @@ export default function WorkPage() {
 
   return (
     <>
-      {/* ── HERO ── */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[75vh] md:min-h-[85vh] flex flex-col justify-end pb-20 px-6 md:px-12 lg:px-16 bg-[#050505] overflow-hidden"
-      >
-        {/* Noise texture overlay */}
+    {/* ── HERO ── */}
+<section
+  ref={heroRef}
+  className="relative min-h-[85vh] flex flex-col justify-between pb-16 px-6 md:px-12 lg:px-16 bg-[#050505] overflow-hidden"
+>
+
+  {/* background effects (unchanged) */}
+  <div className="absolute inset-0 pointer-events-none opacity-40" />
+
+  {/* HEADER TEXT */}
+  <div className="pt-28">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="mb-6"
+    >
+      <span className="text-[11px] tracking-[0.5em] text-white/40 uppercase">
+        Our Work
+      </span>
+    </motion.div>
+
+    <motion.h1
+      className="text-[clamp(3.2rem,8vw,7rem)] font-bold text-white leading-[0.95]"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      Built to
+      <br />
+      <span className="text-white/30">perform.</span>
+    </motion.h1>
+
+    <p className="mt-6 max-w-xl text-white/50 text-base md:text-lg">
+      Web apps, mobile platforms, and CRM systems crafted for scale and performance.
+    </p>
+  </div>
+
+  {/* ── HORIZONTAL PROJECT STRIP ── */}
+  <div className="mt-16">
+    <div className="flex items-center justify-between mb-4">
+      <span className="text-[11px] tracking-[0.5em] text-white/30 uppercase">
+        Featured Projects
+      </span>
+    </div>
+
+    <div className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory">
+      {PROJECTS.filter(p => p.featured).map((project, i) => (
         <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")`,
-            backgroundSize: "200px 200px",
-          }}
-        />
-
-        {/* Radial glow */}
-        <div
-          className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)",
-          }}
-        />
-
-        {/* Counter top-right */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 1 }}
-          className="absolute top-28 right-6 md:right-12 lg:right-16 text-right"
+          key={project.title}
+          className="min-w-[320px] md:min-w-[420px] snap-start group relative rounded-2xl overflow-hidden border border-white/10 bg-black"
         >
-          <span className="text-[10px] font-semibold uppercase tracking-[0.5em] text-white/20">
-            {PROJECTS.length} Projects
-          </span>
-        </motion.div>
+          <div className="relative h-[220px] md:h-[260px]">
+            <Image
+  src={project.image}
+  alt={project.title}
+  fill
+  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  loading="lazy"
+  unoptimized
+  onError={(e) => {
+    // fallback so broken Cloudinary images don't crash layout
+    (e.target as HTMLImageElement).src =
+      "https://via.placeholder.com/800x600?text=Project";
+  }}
+/>
+          </div>
 
-        {/* Overline */}
-        <motion.div
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="work-hero-sub mb-6"
-        >
-          <span className="text-[11px] font-semibold uppercase tracking-[0.5em] text-white/35">
-            Our Work
-          </span>
-        </motion.div>
+          <div className="p-4">
+            <h3 className="text-white font-semibold text-lg">
+              {project.title}
+            </h3>
+            <p className="text-white/40 text-sm mt-1 line-clamp-2">
+              {project.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 
-        {/* Main heading */}
-        <motion.h1
-          className="work-hero-heading text-[clamp(3.5rem,10vw,8.5rem)] font-bold tracking-tight text-white leading-[0.95] max-w-5xl"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Products built
-          <br />
-          <span className="text-white/25">to last.</span>
-        </motion.h1>
-
-        {/* Divider + tagline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="work-hero-sub mt-8 flex items-center gap-6"
-        >
-          <div className="h-px w-12 bg-white/20" />
-          <p className="text-sm md:text-base text-white/40 max-w-sm leading-relaxed">
-            Web apps, mobile experiences, and CRM systems that move the needle
-            for real businesses.
-          </p>
-        </motion.div>
-
-        {/* Scroll hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="absolute bottom-8 right-6 md:right-12 flex flex-col items-center gap-2"
-        >
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
-          >
-            <div className="h-6 w-px bg-gradient-to-b from-white/30 to-transparent" />
-            <span className="text-[9px] font-semibold uppercase tracking-[0.5em] text-white/25">
-              Scroll
-            </span>
-          </motion.div>
-        </motion.div>
-      </section>
+  {/* scroll hint */}
+  <div className="absolute bottom-6 right-6 text-white/30 text-[10px] tracking-[0.4em] uppercase">
+    Scroll →
+  </div>
+</section>
 
       {/* ── AGENCY STATS ── */}
       <section
