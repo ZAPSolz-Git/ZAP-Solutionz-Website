@@ -2,7 +2,7 @@
 import DesignClient from "./DesignClient";
 
 export const metadata = {
-  title: "Responsive Design | Zap Solutions",
+  title: "Responsive Design | ZAP Solutionz",
   description: "Beautiful, fast, and mobile-first web design.",
 };
 

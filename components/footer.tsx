@@ -35,7 +35,7 @@ export default function Footer() {
           <div>
             <h2 className="mb-3 text-4xl font-bold tracking-tight bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent"
 style={{ textShadow: "0 0 40px rgba(255,255,255,0.08)" }}>
-              Zap Solutions
+              ZAP Solutionz
             </h2>
             <p className="max-w-sm text-sm leading-relaxed text-white/40">
               We build modern web and mobile applications for startups and businesses worldwide. 
@@ -92,7 +92,7 @@ From idea to launch — we turn vision into reality.
               Contact
             </h3>
             <p className="mb-2 text-sm font-medium text-white/45">
-              info@zapwms.com
+             info@zapsolutionz.com
             </p>
             <p className="text-sm font-medium text-white/45">
               24/7 Support Available
@@ -125,7 +125,7 @@ From idea to launch — we turn vision into reality.
             ))}
           </div>
           <p className="text-[10px] font-medium tracking-[0.15em] text-white/20">
-            &copy; {new Date().getFullYear()} ZapSolutions. All rights reserved. Powered by ZAPWMS.
+            &copy; {new Date().getFullYear()} ZapSolutionz. All rights reserved. Powered by ZAPWMS.
           </p>
         </div>
       </div>

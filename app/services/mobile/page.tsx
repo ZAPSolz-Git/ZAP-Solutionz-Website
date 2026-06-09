@@ -2,7 +2,7 @@
 import MobileClient from "./MobileClient";
 
 export const metadata = {
-  title: "Mobile App Development | Zap Solutions",
+  title: "Mobile App Development | ZAP Solutionz",
   description: "iOS & Android apps that users love – built with performance and engagement in mind.",
 };
 

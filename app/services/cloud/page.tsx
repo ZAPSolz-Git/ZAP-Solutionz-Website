@@ -2,7 +2,7 @@
 import CloudClient from "./CloudClient";
 
 export const metadata = {
-  title: "Cloud Support Services | Zap Solutions",
+  title: "Cloud Support Services | ZAP Solutionz",
   description: "Scalable, secure cloud infrastructure with 99.99% uptime SLA.",
 };
 

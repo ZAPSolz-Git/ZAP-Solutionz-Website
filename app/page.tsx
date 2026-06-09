@@ -50,8 +50,6 @@ export default function Home() {
         
         <ProcessScroll />
        
-
-
         
          {/* <MagicBento 
   textAutoHide={true}
