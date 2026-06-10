@@ -14,7 +14,7 @@ const FRAME_END = 192;
 const TOTAL_FRAMES = FRAME_END - FRAME_START + 1;
 
 const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-const FOLDER = "armorray/frames-1";
+const FOLDER = "zapsolution/frames-1";
 const PRELOAD_AHEAD = 40;
 
 function formatFrameNumber(num: number): string {

@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-, "app/api/frames/routes.js"  ],
+, "app/api/frames/route.js"  ],
   "exclude": [
     "node_modules"
   ]
