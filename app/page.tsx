@@ -17,6 +17,8 @@ import FeaturesGrid from "@/components/features-grid";
 import ProjectShowcase from "@/components/project-showcase";
 import Testimonials from "@/components/testimonials";
 import SectionFadeTransition from "@/components/section-fade-transition";
+import ProductsShowcase from "@/components/products-showcase";
+import Clients from "@/components/clients";
 
 
 
@@ -68,6 +70,8 @@ export default function Home() {
         {/* <YachtMorph /> */}
         <Experience />
          <FeaturesGrid />  
+          <ProductsShowcase />
+          <Clients />
           {/* <HorizontalShowcase />  */}
          {/* <ProjectShowcase /> */}
         {/* <Globe /> */}
