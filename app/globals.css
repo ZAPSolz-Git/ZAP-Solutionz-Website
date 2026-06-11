@@ -92,9 +92,9 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-* {
+/* * {
   cursor: none !important;
-}
+} */
 
 @layer base {
   * {
@@ -105,11 +105,12 @@
   }
 }
 
+/* 
 @media (pointer: coarse) {
   * {
     cursor: auto !important;
   }
-}
+} */
 
 /* Lenis smooth scroll */
 html.lenis, html.lenis body {

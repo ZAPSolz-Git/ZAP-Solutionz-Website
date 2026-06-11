@@ -5,7 +5,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 // ==================== CONFIGURATION ====================
-const FRAME_START = 1;
+const FRAME_START = 2;
 const FRAME_END = 379;
 const TOTAL_FRAMES = FRAME_END - FRAME_START + 1;
 

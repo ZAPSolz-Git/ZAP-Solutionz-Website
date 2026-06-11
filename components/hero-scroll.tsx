@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // ==================== CONFIGURATION ====================
-const FRAME_START = 1;
+const FRAME_START = 2; // frame_0001.jpg was deleted; sequence now starts at frame_0002
 const FRAME_END = 192;
 const TOTAL_FRAMES = FRAME_END - FRAME_START + 1;
 
