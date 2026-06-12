@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 interface Product {
   id: string;
@@ -12,6 +13,7 @@ interface Product {
   tags: string[];
   highlights: string[];
   accentColor: string;
+  images?: string[]; // optional array of image URLs/paths
 }
 
 const PRODUCTS: Product[] = [
@@ -29,6 +31,15 @@ const PRODUCTS: Product[] = [
       "Reporting, analytics & compliance alerts",
     ],
     accentColor: "#3B82F6",
+    images: [
+      "/images/projects/pmis/1.png",
+      "/images/projects/pmis/3.png",
+      "/images/projects/pmis/4.png",
+      "/images/projects/pmis/8.png",
+      "/images/projects/pmis/9.png",
+      "/images/projects/pmis/10.png",
+      "/images/projects/pmis/11.png",
+    ],
   },
   {
     id: "om",
@@ -44,6 +55,10 @@ const PRODUCTS: Product[] = [
       "Real-time status tracking & reporting",
     ],
     accentColor: "#8B5CF6",
+    images: [
+      "/images/projects/OM/onm1.png",
+      "/images/projects/OM/onm2.jpg",
+    ],
   },
   {
     id: "mfg",
@@ -59,6 +74,11 @@ const PRODUCTS: Product[] = [
       "Packaging & distribution tracking",
     ],
     accentColor: "#F59E0B",
+    images: [  
+      "/images/projects/manufacturing/1.jpg",
+      "/images/projects/manufacturing/2.jpg",
+     "/images/projects/manufacturing/tissue.jpg",
+    ],
   },
   {
     id: "tms",
@@ -74,6 +94,12 @@ const PRODUCTS: Product[] = [
       "Analytics dashboard & resolution reporting",
     ],
     accentColor: "#EF4444",
+    images: [
+      "/images/projects/Ticketing/1.jpg",
+      "/images/projects/Ticketing/2.jpg",
+      "/images/projects/Ticketing/1.jpg",
+      "/images/projects/Ticketing/2.jpg",
+    ],
   },
   {
     id: "sims",
@@ -89,12 +115,25 @@ const PRODUCTS: Product[] = [
       "Property records & maintenance history",
     ],
     accentColor: "#10B981",
+    images: [
+      "/images/projects/sims/1.jpg",
+      "/images/projects/sims/2.jpg",
+      "/images/projects/sims/3.jpg",
+      "/images/projects/sims/4.jpg",
+    ],
   },
 ];
 
 export default function ProductsShowcase() {
   const [active, setActive] = useState(PRODUCTS[0].id);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const current = PRODUCTS.find((p) => p.id === active)!;
+  const hasImages = current.images && current.images.length > 0;
+
+  const handleTabChange = (id: string) => {
+    setActive(id);
+    setActiveImageIndex(0); // reset image index on tab switch
+  };
 
   return (
     <section className="relative bg-[#050505] py-32 overflow-hidden" id="products">
@@ -128,7 +167,7 @@ export default function ProductsShowcase() {
           {PRODUCTS.map((p) => (
             <button
               key={p.id}
-              onClick={() => setActive(p.id)}
+              onClick={() => handleTabChange(p.id)}
               className={`relative rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 ${
                 active === p.id
                   ? "text-black"
@@ -199,39 +238,96 @@ export default function ProductsShowcase() {
               </div>
             </div>
 
-            {/* Right: Visual accent card */}
+            {/* Right: Image card (with fallback to accent card) */}
             <div
-              className="relative flex flex-col justify-end overflow-hidden rounded-2xl p-8 min-h-[320px]"
+              className="relative flex flex-col justify-end overflow-hidden rounded-2xl min-h-[320px]"
               style={{
                 background: `radial-gradient(ellipse at 70% 30%, ${current.accentColor}22 0%, transparent 70%), #0d0d0d`,
                 border: `1px solid ${current.accentColor}25`,
               }}
             >
-              {/* Big background number */}
-              <span
-                className="pointer-events-none absolute right-6 top-6 select-none text-[10rem] font-black leading-none opacity-[0.04]"
-                style={{ color: current.accentColor }}
-              >
-                {(PRODUCTS.findIndex((p) => p.id === active) + 1)
-                  .toString()
-                  .padStart(2, "0")}
-              </span>
+              {hasImages ? (
+                <>
+                  {/* Main image */}
+                  <div className="relative flex-1 w-full overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeImageIndex}
+                        initial={{ opacity: 0, scale: 1.03 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
+                        className="absolute inset-0"
+                      >
+                        <Image
+                          src={current.images![activeImageIndex]}
+                          alt={`${current.title} screenshot ${activeImageIndex + 1}`}
+                          fill
+                          className="object-cover object-top"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        {/* Subtle gradient overlay at bottom so dots sit cleanly */}
+                        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent" />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
 
-              <div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-white/25">
-                  Module
-                </span>
-                <p
-                  className="mt-2 text-5xl font-black tracking-tight"
-                  style={{ color: current.accentColor }}
-                >
-                  {current.label}
-                </p>
-                <p className="mt-3 text-sm text-white/30 max-w-xs leading-relaxed">
-                  Part of the ZAP enterprise software suite — designed for
-                  Indian businesses.
-                </p>
-              </div>
+                  {/* Dot navigation — only shown when multiple images */}
+                  {current.images!.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+                      {current.images!.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setActiveImageIndex(i)}
+                          className="transition-all duration-200"
+                          aria-label={`View screenshot ${i + 1}`}
+                        >
+                          <span
+                            className="block rounded-full transition-all duration-200"
+                            style={{
+                              backgroundColor:
+                                i === activeImageIndex
+                                  ? current.accentColor
+                                  : "rgba(255,255,255,0.25)",
+                              width: i === activeImageIndex ? "20px" : "6px",
+                              height: "6px",
+                            }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                /* Fallback: original accent card when no images */
+                <div className="p-8">
+                  {/* Big background number */}
+                  <span
+                    className="pointer-events-none absolute right-6 top-6 select-none text-[10rem] font-black leading-none opacity-[0.04]"
+                    style={{ color: current.accentColor }}
+                  >
+                    {(PRODUCTS.findIndex((p) => p.id === active) + 1)
+                      .toString()
+                      .padStart(2, "0")}
+                  </span>
+
+                  <div>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-white/25">
+                      Module
+                    </span>
+                    <p
+                      className="mt-2 text-5xl font-black tracking-tight"
+                      style={{ color: current.accentColor }}
+                    >
+                      {current.label}
+                    </p>
+                    <p className="mt-3 text-sm text-white/30 max-w-xs leading-relaxed">
+                      Part of the ZAP enterprise software suite — designed for
+                      Indian businesses.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
         </AnimatePresence>
